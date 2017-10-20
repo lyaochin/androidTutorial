@@ -8,8 +8,13 @@
     tools:context="lyaochin.listview.MainActivity"
     android:layout_margin="10dp">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText" />
 
     <ListView
+        android:layout_marginTop="40dp"
         android:layout_width="368dp"
         android:layout_height="495dp"
         tools:layout_editor_absoluteX="8dp"

@@ -2,8 +2,13 @@ package lyaochin.listview
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.View
+import android.widget.EditText
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,15 +16,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // получаем экземпляр элемента ListView
+// получаем экземпляр элемента ListView
         val listView = findViewById(R.id.listView) as ListView
+        val editText = findViewById(R.id.editText) as EditText
 
-        //обращаемся к строковым ресурсам
-        val catNames = resources.getStringArray(R.array.cat_names)
+        // Создаём пустой массив для хранения значений
+        val myArray: ArrayList<String> = ArrayList()
 
-        // используем адаптер данных
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, catNames)
-//
+        // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
+        val adapter: ArrayAdapter<String>
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, myArray)
+
+        // Привяжем массив через адаптер к ListView
         listView.adapter = adapter
+
+        // Прослушиваем нажатия клавиш
+        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (event.action === KeyEvent.ACTION_DOWN)
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    myArray.add(0, editText.text.toString())
+                    adapter.notifyDataSetChanged()
+                    editText.setText("")
+                    return@OnKeyListener true
+                }
+            false
+        })
     }
 }
