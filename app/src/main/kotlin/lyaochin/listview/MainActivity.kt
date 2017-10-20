@@ -8,6 +8,10 @@ import android.widget.ListView
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
+import android.widget.TextView
+import android.widget.AdapterView
+import lyaochin.listview.R.id.listView
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,5 +45,10 @@ class MainActivity : AppCompatActivity() {
                 }
             false
         })
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, itemClicked, position, id ->
+            Toast.makeText(applicationContext, (itemClicked as TextView).text,
+                           Toast.LENGTH_SHORT).show()
+        }
     }
 }
