@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         // используем адаптер данных
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, catNames)
-//
+
         listView.adapter = adapter
     }
 }
